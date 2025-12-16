@@ -98,6 +98,15 @@ export async function PUT(
       .populate('user', 'name email')
       .populate('product', 'name');
 
+    // Check if update was successful (Change made at 23:45 on 16/12/2025)
+    if (!updatedReview) {
+      return NextResponse.json(
+      { success: false, message: "Review not found" },
+      { status: 404 }
+  );
+}   
+
+
     // Update product average rating
     await updateProductRating(updatedReview.product.toString());
 
